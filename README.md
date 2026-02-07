@@ -1,6 +1,6 @@
 # Mini face recognition project
 
-This project takes two images, uses face recognition and OpenCV to decide whether a person appears in an image or not.
+This project takes two images, uses face recognition and OpenCV to decide whether a specific person appears in an image or not.
 
 **Link to project:** 
 
