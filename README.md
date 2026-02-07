@@ -1,6 +1,6 @@
 # Mini face recognition project
 
-This project takes two images, uses face recognition and OpenCV to decide whether a specific person appears in an image or not.
+This project implements a face recognition pipeline which uses OpenCV to detect candidate faces and then applies pre-trained facial embeddings to determine wheter a specific person is in an image or not.
 
 **Link to project:** 
 
