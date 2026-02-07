@@ -8,17 +8,16 @@ This project takes two images, uses face recognition and OpenCV to decide whethe
 
 **Tech used:** Python, OpenCV, face_recognition, scikit-learn
 
-Used OpenCV tool Haar Cascade to find general regions in which a face may appear. Applied this to the first image to find as many facial regions as possible. Stored these regions in folder "stored-faces". 
-For each potential face, we take a cropped image, ie from the corner create a box, and store this in a file under the folder. 
+**Face recognition** <br>
+Uses OpenCV tool Haar Cascade to find general regions in which a face may appear. This is applied to the first image to detect multiple face candidates, which are stored in the "stored-faces" folder. For each candidate, a cropped image is created by extracting the bounding box region and saving it as a separate file.
 
-We then do double detection using face_recognition (dlib). For the seen faces, we verify whether they are actually a face or not then create a list of face embeddings.
-If this list is empty, ie we have no faces, we continue. Otherwise, we append to array stored tuple of (filename, emb), where emb is its corresponding embedding.
-We do the same for our query image - ie the one we are trying to see is in the general picture. We check whether we can detect a face and if so find the embeddings.
+**Embeddings of seen faces + storing, Embeddings of unseen face** <br>
+A second detection step is then performed using face_recognition (dlib). Each cropped candidate is verified to ensure it contains a valid face, after which face embeddings are generated.
+If no embedding is produced, the candidate is discarded. Otherwise, a tuple of (filename, embedding) is appended to the stored list.
+The same embedding process is applied to the query image - the image being checked for presence in the original scene. If a face is successfully detected, its embedding is generated.
 
-Now, we do comparisons, to see which embedding is closest to our query embedding - this will be our face match. We do this using scikit-learn's pairwise metrics module.
-We find which faces' embeddings have the smallest cosine distance between them.
-
-If we find none, we return "Face not detected (no match)", otherwise we show the cropped_image of the match as a pop-up window. 
+**Comparison** <br>
+Finally, embedding comparisons are made, to see which embedding is closest to our query embedding - this will be our face match. This is done using scikit-learn’s pairwise metrics module. Cosine distance is used to identify the stored face embedding closest to the query embedding. If no valid match is found, the system returns "Face not detected (no match)". Otherwise, the cropped image of the closest match is displayed in a pop-up window.
 
 
 ## Optimisations
